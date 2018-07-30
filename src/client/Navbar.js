@@ -9,16 +9,14 @@ class Navbar extends React.Component {
     }
     render() {
         return (
-            <BrowserRouter>
-                <React.Fragment>
-                    <Link to="/Home">Home</Link>
-                    <Link to="/About">About</Link>
-                    <div>
-                        <Route path="/Home" component={Home} />
-                        <Route path="/About" component={About} />
-                    </div>
-                </React.Fragment>
-            </BrowserRouter>
+            <React.Fragment>
+                <Link to="/Home">Home</Link>
+                <Link to="/About">About</Link>
+                <div>
+                    <Route path="/Home" component={Home} />
+                    <Route path="/About" component={About} />
+                </div>
+            </React.Fragment>
         )
     }
 }

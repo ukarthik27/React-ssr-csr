@@ -3,25 +3,24 @@ import React, { Component } from "react";
 import ReactImage from "./react.png";
 import fs from 'fs';
 import { basename, join } from 'path';
-import Navbar from "../server/Navbar";
+import Navbar from "./Navbar";
+import { StaticRouter, Route, Link } from "react-router-dom";
+import fetch from 'isomorphic-fetch';
+
 const styleApp = fs.readFileSync(
-    join(__dirname, 'app.css'),
+    join(__dirname, 'Html.css'),
     'utf-8',
 );
 
 export default class App extends Component {
     constructor(props) {
         super(props);
-        this.state = { username: null };
     }
-
-    componentDidMount() {
-        fetch("/api/getUsername")
-            .then(res => res.json())
-            .then(user => this.setState({ username: user.username }));
-    }
-
+ 
     render() {
+          
+        console.log(this.props.data);    
+        var  context = {}
         return (
             <html>
                 <head>
@@ -29,9 +28,17 @@ export default class App extends Component {
                     <script src="/build/bundle.js" defer></script>
                 </head>
                 <body>
+                    <div id="header">
+                        <img id="logo" src='/static/download.png' alt="react" />
+                        <div id="navbar">
+                            <StaticRouter location={this.props.url} context={context}>
+                                <Navbar />
+                            </StaticRouter>
+                        </div>
+                        <div id="user-name">{this.props.data.username}</div>
+                    </div>
                     <div id="root">
                     </div>
-                    <img src='/static/download.png' alt="react" />
                 </body>
             </html>
         );
