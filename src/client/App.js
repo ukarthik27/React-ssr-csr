@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 //import "./app.css";
 import ReactImage from "./react.png";
+import RouteComp from "./components/routeComp";
 import fs from 'fs';
 import { basename, join } from 'path';
-
+import { BrowserRouter, StaticRouter, Route, Link } from 'react-router-dom';
 const styleApp = fs.readFileSync(
   join(__dirname, 'app.css'),
   'utf-8',
@@ -25,7 +26,7 @@ export default class App extends Component {
     return (
       <html>
         <head>
-        <style type="text/css" dangerouslySetInnerHTML={{__html: styleApp}} />
+          <style type="text/css" dangerouslySetInnerHTML={{ __html: styleApp }} />
         </head>
         <body>
           <div>
@@ -35,6 +36,9 @@ export default class App extends Component {
                 <h1>Loading.. please wait!</h1>
               )}
             <img src='/static/download.png' alt="react" />
+            
+              <RouteComp />              
+              
           </div>
         </body>
       </html>

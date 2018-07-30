@@ -5,10 +5,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const outputDirectory = "dist";
 
 module.exports = {
-  entry: "./src/client/index.js",
+  entry: {
+    index : "./src/client/index.js" },
   output: {
     path: path.join(__dirname, outputDirectory),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -48,7 +50,8 @@ module.exports = {
     open: true,
     proxy: {
       "/api": "http://localhost:8080"
-    }
+    },
+    historyApiFallback: true,
   },
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
