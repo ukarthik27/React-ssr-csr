@@ -12,20 +12,24 @@ const styleApp = fs.readFileSync(
     'utf-8',
 );
 
-export default class App extends Component {
+class App extends Component {
     constructor(props) {
         super(props);
     }
- 
+    
     render() {
-          
-        console.log(this.props.data);    
+        const state = this.props.initial_state
+
+        const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(state)}`
+        console.log("props in server side :", this.props)
+        //console.log("username in server side :", this.props.initital_state.username)
         var  context = {}
         return (
             <html>
                 <head>
                     <style type="text/css" dangerouslySetInnerHTML={{ __html: styleApp }} />
                     <script src="/build/bundle.js" defer></script>
+                    <script dangerouslySetInnerHTML={{__html : initialState}} />
                 </head>
                 <body>
                     <div id="header">
@@ -35,7 +39,7 @@ export default class App extends Component {
                                 <Navbar />
                             </StaticRouter>
                         </div>
-                        <div id="user-name">{this.props.data.username}</div>
+                        <div id="user-name">{state.items.username}</div>
                     </div>
                     <div id="root">
                     </div>
@@ -44,3 +48,5 @@ export default class App extends Component {
         );
     }
 }
+
+export default App;

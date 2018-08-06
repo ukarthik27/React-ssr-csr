@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const outputDirectory = "dist";
+const outputDirectory = "build";
 
 module.exports = {
   entry: {
@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, outputDirectory),
     filename: "bundle.js",
-    publicPath: '/'
+    //publicPath: '/'
   },
   module: {
     rules: [
@@ -33,7 +33,7 @@ module.exports = {
             options: {
               // you can specify a publicPath here
               // by default it use publicPath in webpackOptions.output
-              publicPath: '../'
+              //publicPath: '../'
             }
           },
           "css-loader"

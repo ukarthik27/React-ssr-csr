@@ -1,6 +1,6 @@
 const express = require("express");
 var cors = require('cors')
-
+const fetch = require("isomorphic-fetch")
 const app = express();
 app.use(cors())
 var homepageData = [
@@ -25,11 +25,39 @@ var aboutpageData = [
 ]
 
 app.get("/api/getHomedata",(req,res)=>{
-    res.send(homepageData);
+    fetch("http://localhost:3015/api/getUsername")
+    .then(function(res){
+        return res.json()
+    })
+    .then(function(data){
+        var resp_obj = {
+            username : data.username,
+            pagedata : homepageData
+        }
+        console.log("Home response object:",resp_obj)
+        res.send(resp_obj)
+    })
+    .catch((error)=>{
+        console.log("error:",error)
+    })
 })
 
 app.get("/api/getAboutdata",(req,res)=>{
-    res.send(aboutpageData);
+    fetch("http://localhost:3015/api/getUsername")
+    .then(function(res){
+        return res.json()
+    })
+    .then(function(data){
+        var resp_obj = {
+            username : data.username,
+            pagedata : aboutpageData
+        }
+        console.log("About response object:",resp_obj)
+        res.send(resp_obj)
+    })
+    .catch((error)=>{
+        console.log("error:",error)
+    })
 })
 
 app.listen(3014, () => console.log('Listening on port 3014 for API calls!'));
