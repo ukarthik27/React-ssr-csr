@@ -9,6 +9,7 @@ import Mainreducer from "../universal/MainReducer";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
+import HtmlSytle from "./Html.css";
 
 const allreducers = combineReducers({
     items: Mainreducer

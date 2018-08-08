@@ -6,11 +6,13 @@ const outputDirectory = "build";
 
 module.exports = {
   entry: {
-    index : "./src/client/index.js" },
+    index : "./src/client/index.js",
+    home : "./src/client/Home.js",
+    about : "./src/client/About.js"},
   output: {
     path: path.join(__dirname, outputDirectory),
-    filename: "bundle.js",
-    //publicPath: '/'
+    filename: "[name].js",
+    // publicPath: '/'
   },
   module: {
     rules: [
@@ -33,7 +35,7 @@ module.exports = {
             options: {
               // you can specify a publicPath here
               // by default it use publicPath in webpackOptions.output
-              //publicPath: '../'
+              publicPath: '../'
             }
           },
           "css-loader"

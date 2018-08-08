@@ -4,6 +4,7 @@ import { basename, join } from 'path';
 import Navbar from "./Navbar";
 import { StaticRouter, Route, Link } from "react-router-dom";
 import Home from "./Home";
+import Homesytle from "./Home.css";
 import About from "./About";
 
 const styleApp = fs.readFileSync(
@@ -20,14 +21,18 @@ class App extends Component {
         const state = this.props.initial_state
 
         const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(state)}`
-        console.log("props in server side :", this.props)
+        
+        const styleFile = "/build/"+state.items.pageType + ".css"
+        console.log("pageType",styleFile)
+        //console.log("props in server side :", this.props)
         //console.log("username in server side :", this.props.initital_state.username)
         var context = {}
         return (
             <html>
                 <head>
                     <style type="text/css" dangerouslySetInnerHTML={{ __html: styleApp }} />
-                    <script src="/build/bundle.js" defer></script>
+                    <script src="/build/index.js" defer></script>
+                    <link rel = "stylesheet" type = "text/css"  href = {styleFile} />
                     <script dangerouslySetInnerHTML={{ __html: initialState }} />
                 </head>
                 <body id="container">

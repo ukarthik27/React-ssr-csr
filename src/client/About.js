@@ -1,11 +1,17 @@
 import React from "react";
-import { connect } from "react-redux"
+import { connect } from "react-redux";
+import AboutStyle from "./About.css";
 
 class About extends React.Component {
     constructor(props) {
         super(props);
     }
     componentDidMount(props) {
+        var linkTag = document.createElement("link")
+        linkTag.rel = "stylesheet"
+        linkTag.type = "text/css"
+        linkTag.href = "/build/about.css"
+        document.getElementsByTagName("head")[0].appendChild(linkTag)
         fetch("http://localhost:3014/api/getAboutdata")
             .then(res => res.json())
             .then((data) => {

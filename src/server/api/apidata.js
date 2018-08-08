@@ -32,7 +32,8 @@ app.get("/api/getHomedata",function(req,res){
     .then(function(data){
         var resp_obj = {
             username : data.username,
-            pagedata : homepageData
+            pagedata : homepageData,
+            pageType : "home"
         }
         console.log("Home response object:",resp_obj)
         res.send(resp_obj)
@@ -50,7 +51,8 @@ app.get("/api/getAboutdata",(req,res)=>{
     .then(function(data){
         var resp_obj = {
             username : data.username,
-            pagedata : aboutpageData
+            pagedata : aboutpageData,
+            pageType : "about"
         }
         console.log("About response object:",resp_obj)
         res.send(resp_obj)

@@ -1,11 +1,17 @@
 import React from "react";
 import { connect } from "react-redux"
+import HomeStyle from "./Home.css";
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
     }
     componentDidMount(props) {
+        var linkTag = document.createElement("link")
+        linkTag.rel = "stylesheet"
+        linkTag.type = "text/css"
+        linkTag.href = "/build/home.css"
+        document.getElementsByTagName("head")[0].appendChild(linkTag)
         fetch("http://localhost:3014/api/getHomedata")
             .then(res => res.json())
             .then((data) => {
