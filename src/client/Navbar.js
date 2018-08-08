@@ -10,8 +10,8 @@ class Navbar extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Link to="/Home">Home</Link>
-                <Link to="/About">About</Link>
+                <li className="nav-li"><Link id="nav-link" to="/Home">HOME</Link></li>
+                <li className="nav-li"><Link id="nav-link" to="/About">ABOUT</Link></li>
             </React.Fragment>
         )
     }

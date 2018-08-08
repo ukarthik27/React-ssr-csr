@@ -16,15 +16,15 @@ class About extends React.Component {
         console.log("ABout : this.props.items", this.props.items.data)
         var pageItems = this.props.items.data
         const pageData = pageItems.map((item) => {
-            return <div key={Math.random()}>
-                <h3>{item.title}</h3>
-                <div>{item.data}</div>
+            return <div className="about-data-div" key={Math.random()}>
+                <div className="about-data-div-heading">{item.title}</div>
+                <div className="about-data-div-data" >{item.data}</div>
             </div>
         })
         console.log(pageData)
         return (
             <React.Fragment>
-                <h1>About</h1>
+                <div id="about-heading">About</div>
                 {pageData}
             </React.Fragment>
         )

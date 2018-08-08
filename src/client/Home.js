@@ -16,15 +16,15 @@ class Home extends React.Component {
         console.log("HOME - this.props.items", this.props.items.data)
         var pageItems = this.props.items.data
         const pageData = pageItems.map((item) => {
-            return <div key={Math.random()}>
-                <h3>{item.title}</h3>
-                <div>{item.data}</div>
+            return <div className="home-data-div" key={Math.random()}>
+                <div className="home-data-div-heading">{item.title}</div>
+                <div className="home-data-div-data">{item.data}</div>
             </div>
         })
         //console.log(pageData)
         return (
             <React.Fragment>
-                <h1>Home</h1>
+                <div id="home-heading">Home</div>
                 {pageData}
             </React.Fragment>
         )

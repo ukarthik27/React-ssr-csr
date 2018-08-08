@@ -5,26 +5,26 @@ const app = express();
 app.use(cors())
 var homepageData = [
     {
-        title : "title1",
+        title : "Title 1",
         data : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
     },
     {
-        title : "title2",
+        title : "Title 2",
         data : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
     },
     {
-        title : "title3",
+        title : "Title 3",
         data : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
     }
 ] 
 var aboutpageData = [
     {
-        title : "title1",
+        title : "Title 1",
         data : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
     },
 ]
 
-app.get("/api/getHomedata",(req,res)=>{
+app.get("/api/getHomedata",function(req,res){
     fetch("http://localhost:3015/api/getUsername")
     .then(function(res){
         return res.json()

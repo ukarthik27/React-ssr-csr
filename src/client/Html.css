@@ -1,42 +1,109 @@
-h1 {
-  color: green;
-}
-
 body {
-  text-align: center;
+  /* text-align: center; */
   margin: auto;
   box-sizing: border-box;
   position: relative;
 }
 
 #root {
-  border : 1px solid #bbb;
+  /* border : 1px solid #bbb; */
 }
 
 #header {
+  vertical-align: middle;
+  display: inline-block;
   width : 100%;
   position: relative;
   /* border : 1px solid #bbb; */
-  padding: 5px;
-  margin: 0px 0px 5px 0px;
+  /* padding: 5px; */
   background: #f2f2f2;
+  border-top : 1px solid #474747;
+  border-bottom: 1px solid #474747;
+
 }
 
 #logo {
   display: inline-block;
-  height: 20px;
-  width :37.5px;
-  position: absolute;
-  left : 10px;
+  height: .8em;
+  padding-left: 5px;
+  width :27.5px;
+  position: relative;
+  top : 1.5px;
+  /* position: absolute;
+  left : 10px; */
 }
 
 #navbar {
+  padding-left : 5px;
   display: inline-block;
 }
 
 #user-name {
   display: inline-block;
-  height: 30px;
+  padding : 0px;
   position: absolute;
-  right : 20px;
+  right : 5px;
+}
+
+.nav-li {
+  font-weight: bold;
+  list-style-type: none;
+  display: inline-block;
+  padding : 0px 5px 0px 0px;
+
+}
+#nav-link {
+  color : #474747;
+  text-decoration: none;
+}
+
+#home-heading {
+  text-align: center;
+  padding : 2.5px 0px 2.5px 0px;
+  font-size: 1.5em;
+  color: #474747;
+}
+
+.home-data-div {
+ 
+  margin : 10px 5px 15px 5px;
+  box-shadow: 0px 5px 10px 5px #888888;
+  /* border : 1px solid #bbb; */
+}
+
+.home-data-div-heading {
+  padding : 2.5px;
+  background: #f2f2f2;
+  font-size: 1.25em;
+}
+
+.home-data-div-data {
+  padding: 2.5px;
+  font-family: 'sans-serif';
+}
+
+
+#about-heading {
+  text-align: center;
+  padding : 2.5px 0px 2.5px 0px;
+  font-size: 1.5em;
+  color: #474747;
+}
+
+.about-data-div {
+ 
+  margin : 10px 5px 15px 5px;
+  box-shadow: 0px 5px 10px 5px #888888;
+  /* border : 1px solid #bbb; */
+}
+
+.about-data-div-heading {
+  padding : 2.5px;
+  background: #f2f2f2;
+  font-size: 1.25em;
+}
+
+.about-data-div-data {
+  padding: 2.5px;
+  font-family: 'sans-serif';
 }
