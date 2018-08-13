@@ -1,17 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import AboutStyle from "./About.css";
+import history from "../routes/history";
 
 class About extends React.Component {
     constructor(props) {
         super(props);
     }
     componentDidMount(props) {
-        var linkTag = document.createElement("link")
-        linkTag.rel = "stylesheet"
-        linkTag.type = "text/css"
-        linkTag.href = "/build/about.css"
-        document.getElementsByTagName("head")[0].appendChild(linkTag)
+        if (!history.has("/About")) {
+            var linkTag = document.createElement("link")
+            linkTag.rel = "stylesheet"
+            linkTag.type = "text/css"
+            linkTag.href = "/build/about.css"
+            document.getElementsByTagName("head")[0].appendChild(linkTag)
+            history.add("/About")
+        }
         fetch("http://localhost:3014/api/getAboutdata")
             .then(res => res.json())
             .then((data) => {
@@ -19,7 +23,8 @@ class About extends React.Component {
             })
     }
     render() {
-        console.log("ABout : this.props.items", this.props.items.data)
+        console.log("About : this.props.items", this.props.items)
+        console.log("History : ", history)
         var pageItems = this.props.items.data
         const pageData = pageItems.map((item) => {
             return <div className="about-data-div" key={Math.random()}>
