@@ -16,10 +16,15 @@ class Home extends React.Component {
             document.getElementsByTagName("head")[0].appendChild(linkTag)
             history.add("/Home");
         }
-        fetch("http://localhost:3014/api/getHomedata")
+        fetch("http://localhost:1337/homepagedata")
             .then(res => res.json())
             .then((data) => {
-                this.props.prefetch(data)
+                var state_obj = {
+                    username: "set this right",
+                    pagedata: data,
+                    pageType: "home"
+                }
+                this.props.prefetch(state_obj)
             })
     }
     render() {
@@ -28,7 +33,7 @@ class Home extends React.Component {
         var pageItems = this.props.items.data
         const pageData = pageItems.map((item) => {
             return <div className="home-data-div" key={Math.random()}>
-                <div className="home-data-div-heading">{item.title}</div>
+                <div className="home-data-div-heading">{item.Title}</div>
                 <div className="home-data-div-data">{item.data}</div>
             </div>
         })

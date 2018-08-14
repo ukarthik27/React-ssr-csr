@@ -25,7 +25,7 @@ app.use(cors())
 app.use("/static", express.static('static'));
 app.use("/build", express.static('build'));
 
-app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
+//app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
 app.get('/favicon.ico',(req,res)=> res.send(""))
 app.get('*', (req, res) => {
     console.log("req url in server side:",req.url)
@@ -38,7 +38,12 @@ app.get('*', (req, res) => {
     fetch(api_url)
         .then(response => response.json())
         .then((data) => {
-            store.dispatch({ type: "PREFETCH", payload: data })
+            var resp_obj = {
+            username : os.userInfo().username,
+            pagedata : data,
+            pageType : req.url.slice(1).toLowerCase()
+            }
+            store.dispatch({ type: "PREFETCH", payload: resp_obj })
             console.log("data :", data)
             console.log("req.url :",req.url,"->",store.getState())
             

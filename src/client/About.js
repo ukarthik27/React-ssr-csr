@@ -16,10 +16,15 @@ class About extends React.Component {
             document.getElementsByTagName("head")[0].appendChild(linkTag)
             history.add("/About")
         }
-        fetch("http://localhost:3014/api/getAboutdata")
+        fetch("http://localhost:1337/aboutpagedata")
             .then(res => res.json())
             .then((data) => {
-                this.props.prefetch(data)
+                var state_obj = {
+                    username: "set this right",
+                    pagedata: data,
+                    pageType: "about"
+                }
+                this.props.prefetch(state_obj)
             })
     }
     render() {
@@ -28,7 +33,7 @@ class About extends React.Component {
         var pageItems = this.props.items.data
         const pageData = pageItems.map((item) => {
             return <div className="about-data-div" key={Math.random()}>
-                <div className="about-data-div-heading">{item.title}</div>
+                <div className="about-data-div-heading">{item.Title}</div>
                 <div className="about-data-div-data" >{item.data}</div>
             </div>
         })

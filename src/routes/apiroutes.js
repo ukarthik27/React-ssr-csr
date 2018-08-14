@@ -2,11 +2,11 @@
 const routes = [
   {
     path : "/Home",
-    api : "http://localhost:3014/api/getHomedata"
+    api : "http://localhost:1337/homepagedata"
   },
   {
     path : "/About",
-    api : "http://localhost:3014/api/getAboutdata"
+    api : "http://localhost:1337/aboutpagedata"
   }
 ];
 
