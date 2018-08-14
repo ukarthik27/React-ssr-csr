@@ -1,7 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
-import Home from "./Home";
-import About from "./About";
 
 class Navbar extends React.Component {
     constructor(props) {

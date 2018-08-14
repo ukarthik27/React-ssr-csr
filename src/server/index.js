@@ -7,6 +7,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import Mainreducer from "../universal/MainReducer";
 import fetch from "isomorphic-fetch";
+var bodyParser = require('body-parser')
 
 const os = require('os');
 var cors = require('cors')
@@ -21,40 +22,61 @@ const store = createStore(allReducers);
 const app = express();
 
 app.use(cors())
+app.use(bodyParser.json())
+bodyParser.urlencoded({extended: true})
 
 app.use("/static", express.static('static'));
 app.use("/build", express.static('build'));
 
 //app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
-app.get('/favicon.ico',(req,res)=> res.send(""))
+app.get('/favicon.ico', (req, res) => res.send(""))
+app.post("/LoginValidate", (req, res) => {
+    console.log("------- server side user obj:", req.body)
+    fetch("http://localhost:3014/Validate", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify(req.body)
+    })
+        .then(response => response.json())
+        .then(data => {
+            res.send(data)
+        })
+        .catch(error => console.log("error : ", error))
+
+})
 app.get('*', (req, res) => {
-    console.log("req url in server side:",req.url)
+    console.log("req url in server side:", req.url)
     var api_url = ""
     for (let i = 0; i < apiRoutes.length; i++) {
         if (apiRoutes[i].path === req.url)
             api_url = apiRoutes[i].api
-    } 
-    console.log("api_url:",api_url)
+    }
+    console.log("api_url:", api_url)
     fetch(api_url)
         .then(response => response.json())
         .then((data) => {
             var resp_obj = {
-            username : os.userInfo().username,
-            pagedata : data,
-            pageType : req.url.slice(1).toLowerCase()
+                username: os.userInfo().username,
+                pagedata: data,
+                pageType: req.url.slice(1).toLowerCase()
             }
             store.dispatch({ type: "PREFETCH", payload: resp_obj })
             console.log("data :", data)
-            console.log("req.url :",req.url,"->",store.getState())
-            
+            console.log("req.url :", req.url, "->", store.getState())
+
             const html = renderToString(
                 <Provider store={store} >
-                    <Html url={req.url} initial_state={store.getState()}/>
+                    <Html url={req.url} initial_state={store.getState()} />
                 </Provider>)
             res.send(`${html}`);
         })
-        .catch((error)=>{
-            console.log("error : ",error)
+        .catch((error) => {
+            console.log("error : ", error)
         })
 })
 

@@ -6,6 +6,8 @@ import { StaticRouter, Route, Link } from "react-router-dom";
 import Home from "./Home";
 import Homesytle from "./Home.css";
 import About from "./About";
+import Header from "./Header";
+import LoginComp from "./LoginComp";
 
 const styleApp = fs.readFileSync(
     join(__dirname, 'Html.css'),
@@ -38,16 +40,11 @@ class App extends Component {
                 <body id="container">
                     <StaticRouter location={this.props.url} context={context}>
                         <div id="Parent">
-                            <div id="header">
-                                <img id="logo" src='/static/download.png' alt="react" />
-                                <div id="navbar">
-                                    <Navbar />
-                                </div>
-                                <div id="user-name">{state.items.username}</div>
-                            </div>
+                            <Header />
                             <div id="root">
                                 <Route path="/Home" component={Home} />
                                 <Route path="/About" component={About} />
+                                <Route path="/Login" component={LoginComp} />
                             </div>
                         </div>
                     </StaticRouter>
