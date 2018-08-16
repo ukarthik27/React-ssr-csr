@@ -32,6 +32,7 @@ class App extends Component {
         return (
             <html>
                 <head>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <style type="text/css" dangerouslySetInnerHTML={{ __html: styleApp }} />
                     <script src="/build/index.js" defer></script>
                     <link rel = "stylesheet" type = "text/css"  href = {styleFile} />

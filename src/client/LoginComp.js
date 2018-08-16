@@ -24,9 +24,9 @@ class LoginComp extends React.Component {
                 body: JSON.stringify(user_obj)
             })
                 .then(response => response.json())
-                .then((data)=>{
+                .then((data) => {
                     console.log("-------client side login respdata :", data)
-                    if(data) this.props.loginUpdate(data)
+                    if (data) this.props.loginUpdate(data)
                 })
                 .catch(error => console.log("error : ", error))
             console.log("++++ user obj : ", user_obj)
@@ -36,19 +36,29 @@ class LoginComp extends React.Component {
     }
 
     render() {
-        if(this.props.items.isLoggedIn)
-        console.log("----userInfo",this.props.items.userData)
+        var userInfo;
+        if (this.props.items.isLoggedIn) {
+            console.log("----userInfo", this.props.items.userData)
+            userInfo = this.props.items.userData.userData
+        }
         return (
             <div>
-            <div id="login-comp">
-                <div id="login-comp-heading">Login</div>
-                <input type="text" id="login-comp-uname" placeholder="enter your email"></input>
-                <input type="password" id="login-comp-pwd" placeholder="Password here"></input>
-                <button type="submit" id="login-comp-submit" onClick={this.submitHandler} > SUBMIT </button>
-            </div>
-            <div id="userInfo">
-
-            </div>
+                {
+                    this.props.items.isLoggedIn ?
+                        <div id="userinfo">
+                            <div id="personal-info">Personal Info</div>
+                            <span className="userinfo-text"><strong>Name :</strong>{userInfo.name}</span><br />
+                            <span className="userinfo-text"><strong>Age :</strong>{userInfo.age}</span><br />
+                            <span className="userinfo-text"><strong>Contact :</strong>{userInfo.contact}</span><br />
+                            <span className="userinfo-text"><strong>Address :</strong>{userInfo.address}</span><br />
+                        </div>
+                        : <div id="login-comp">
+                            <div id="login-comp-heading">Login</div>
+                            <input type="text" id="login-comp-uname" placeholder="enter your email"></input>
+                            <input type="password" id="login-comp-pwd" placeholder="Password here"></input>
+                            <button type="submit" id="login-comp-submit" onClick={this.submitHandler} > SUBMIT </button>
+                        </div>
+                }
             </div>
         )
     }
@@ -56,7 +66,7 @@ class LoginComp extends React.Component {
 
 function matchDispatchToProps(dispatch) {
     return {
-        loginUpdate:  (data) => dispatch({ type: "LOGIN", payload: data })
+        loginUpdate: (data) => dispatch({ type: "LOGIN", payload: data })
     }
 }
 

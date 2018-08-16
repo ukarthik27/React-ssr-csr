@@ -9,10 +9,12 @@ class Header extends React.Component {
         super(props)
     }
     render() {
-        var userdiv
+        var userdiv;
+        var userInfo;
         if (this.props.items.isLoggedIn) {
-            console.log("----------", this.props.items.userData.name)
-            userdiv = <li className="nav-li"><Link id="nav-link" to="/Login">{this.props.items.userData.name}</Link></li>
+            console.log("----------", this.props.items.userData.userData)
+            userInfo = this.props.items.userData.userData
+            userdiv = <li className="nav-li"><Link id="nav-link" to="/Login">{userInfo.name}</Link></li>
         }
         else {
             userdiv = <li className="nav-li"><Link id="nav-link" to="/Login">-LoGiN-</Link></li>

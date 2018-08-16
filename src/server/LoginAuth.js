@@ -24,7 +24,7 @@ app.post("/Validate",(req,res)=>{
             console.log("----user obj in LoginAuth:", user_obj)
             if(user_obj.userPwd === req.body.password) {
                 res.send({
-                  name : user_obj.Name  
+                  userData : user_obj.Info  
                 })
 
             }
