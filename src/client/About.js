@@ -37,7 +37,7 @@ class About extends React.Component {
                 <div className="about-data-div-data" >{item.data}</div>
             </div>
         })
-        console.log(pageData)
+        //console.log(pageData)
         return (
             <React.Fragment>
                 <div id="about-heading">About</div>

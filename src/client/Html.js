@@ -25,7 +25,7 @@ class App extends Component {
         const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(state)}`
         
         const styleFile = "/build/"+state.items.pageType + ".css"
-        console.log("pageType",styleFile)
+        console.log("Server - pageType",styleFile)
         //console.log("props in server side :", this.props)
         //console.log("username in server side :", this.props.initital_state.username)
         var context = {}

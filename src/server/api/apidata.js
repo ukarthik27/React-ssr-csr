@@ -35,7 +35,7 @@ app.get("/api/getHomedata",function(req,res){
             pagedata : homepageData,
             pageType : "home"
         }
-        console.log("Home response object:",resp_obj)
+        console.log("---- apidata - Home response object:",resp_obj)
         res.send(resp_obj)
     })
     .catch((error)=>{
@@ -54,7 +54,7 @@ app.get("/api/getAboutdata",(req,res)=>{
             pagedata : aboutpageData,
             pageType : "about"
         }
-        console.log("About response object:",resp_obj)
+        console.log("apidata - About response object:",resp_obj)
         res.send(resp_obj)
     })
     .catch((error)=>{

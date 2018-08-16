@@ -29,7 +29,6 @@ class LoginComp extends React.Component {
                     if (data) this.props.loginUpdate(data)
                 })
                 .catch(error => console.log("error : ", error))
-            console.log("++++ user obj : ", user_obj)
         } else {
             alert("Pls enter credentials again..!!");
         }
@@ -38,8 +37,9 @@ class LoginComp extends React.Component {
     render() {
         var userInfo;
         if (this.props.items.isLoggedIn) {
-            console.log("----userInfo", this.props.items.userData)
-            userInfo = this.props.items.userData.userData
+            console.log("---- Login Comp - userData", this.props.items.userData)
+            console.log("---- Login Comp - userInfo", this.props.items.userData.PersInfo)
+            userInfo = this.props.items.userData.PersInfo
         }
         return (
             <div>

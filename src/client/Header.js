@@ -12,8 +12,8 @@ class Header extends React.Component {
         var userdiv;
         var userInfo;
         if (this.props.items.isLoggedIn) {
-            console.log("----------", this.props.items.userData.userData)
-            userInfo = this.props.items.userData.userData
+            console.log("-------- Header : PersInfo", this.props.items.userData.PersInfo)
+            userInfo = this.props.items.userData.PersInfo
             userdiv = <li className="nav-li"><Link id="nav-link" to="/Login">{userInfo.name}</Link></li>
         }
         else {

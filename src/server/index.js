@@ -44,6 +44,7 @@ app.use("/LoginValidate", (req, res) => {
     })
         .then(response => response.json())
         .then(data => {
+            console.log("====== user id in node :", data.user_id)
             res.send(data)
         })
         .catch(error => console.log("error : ", error))
@@ -56,7 +57,7 @@ app.get('*', (req, res) => {
         if (apiRoutes[i].path === req.url)
             api_url = apiRoutes[i].api
     }
-    console.log("api_url:", api_url)
+    console.log("server side - api_url:", api_url)
     fetch(api_url)
         .then(response => response.json())
         .then((data) => {
@@ -66,7 +67,7 @@ app.get('*', (req, res) => {
                 pageType: req.url.slice(1).toLowerCase()
             }
             store.dispatch({ type: "PREFETCH", payload: resp_obj })
-            console.log("data :", data)
+            //console.log("data :", data)
             console.log("req.url :", req.url, "->", store.getState())
 
             const html = renderToString(

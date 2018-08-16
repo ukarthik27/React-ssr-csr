@@ -13,7 +13,7 @@ app.use(cors())
 
 app.post("/Validate",(req,res)=>{
     var Email = req.body.email
-    console.log("Body :",req.body)
+    //console.log("Body :",req.body)
     fetch("http://localhost:1337/userinfo/?userEmail="+Email)
     .then(res => res.json())
     .then(data => {
@@ -24,7 +24,9 @@ app.post("/Validate",(req,res)=>{
             console.log("----user obj in LoginAuth:", user_obj)
             if(user_obj.userPwd === req.body.password) {
                 res.send({
-                  userData : user_obj.Info  
+                  user_id : user_obj._id,
+                  PersInfo : user_obj.userPersInfo ,
+                  userData : user_obj.userdata
                 })
 
             }
