@@ -1,4 +1,4 @@
-var initial_state = {}
+var initial_state = {isLoggedIn : false}
 
 export default function (state = initial_state, action) {
 
@@ -9,6 +9,12 @@ export default function (state = initial_state, action) {
             newObj.username = action.payload.username
             newObj.data = action.payload.pagedata
             newObj.pageType =  action.payload.pageType
+            return newObj
+        case "LOGIN":
+            console.log("-------Login : ", action.payload);
+            var newObj = { ...state };
+            newObj.isLoggedIn = true
+            newObj.userData = action.payload
             return newObj
     }
 

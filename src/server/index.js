@@ -30,7 +30,7 @@ app.use("/build", express.static('build'));
 
 //app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
 app.get('/favicon.ico', (req, res) => res.send(""))
-app.post("/LoginValidate", (req, res) => {
+app.use("/LoginValidate", (req, res) => {
     console.log("------- server side user obj:", req.body)
     fetch("http://localhost:3014/Validate", {
         method: "POST",

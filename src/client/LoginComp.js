@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux"
 import LoginCompStyle from "./LoginComp.css";
 
 class LoginComp extends React.Component {
@@ -23,6 +24,10 @@ class LoginComp extends React.Component {
                 body: JSON.stringify(user_obj)
             })
                 .then(response => response.json())
+                .then((data)=>{
+                    console.log("-------client side login respdata :", data)
+                    if(data) this.props.loginUpdate(data)
+                })
                 .catch(error => console.log("error : ", error))
             console.log("++++ user obj : ", user_obj)
         } else {
@@ -31,14 +36,34 @@ class LoginComp extends React.Component {
     }
 
     render() {
+        if(this.props.items.isLoggedIn)
+        console.log("----userInfo",this.props.items.userData)
         return (
+            <div>
             <div id="login-comp">
                 <div id="login-comp-heading">Login</div>
                 <input type="text" id="login-comp-uname" placeholder="enter your email"></input>
                 <input type="password" id="login-comp-pwd" placeholder="Password here"></input>
                 <button type="submit" id="login-comp-submit" onClick={this.submitHandler} > SUBMIT </button>
             </div>
+            <div id="userInfo">
+
+            </div>
+            </div>
         )
     }
 }
-export default LoginComp;
+
+function matchDispatchToProps(dispatch) {
+    return {
+        loginUpdate:  (data) => dispatch({ type: "LOGIN", payload: data })
+    }
+}
+
+function mapStateToProps(state) {
+    return {
+        items: state.items
+    }
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(LoginComp);
