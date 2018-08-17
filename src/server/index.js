@@ -7,7 +7,8 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import Mainreducer from "../universal/MainReducer";
 import fetch from "isomorphic-fetch";
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser')
 
 const os = require('os');
 var cors = require('cors')
@@ -16,14 +17,14 @@ const allReducers = combineReducers({
     items: Mainreducer
 });
 
-const store = createStore(allReducers);
 
 
 const app = express();
 
 app.use(cors())
 app.use(bodyParser.json())
-bodyParser.urlencoded({extended: true})
+app.use(cookieParser())
+bodyParser.urlencoded({ extended: true })
 
 app.use("/static", express.static('static'));
 app.use("/build", express.static('build'));
@@ -45,12 +46,16 @@ app.use("/LoginValidate", (req, res) => {
         .then(response => response.json())
         .then(data => {
             console.log("====== user id in node :", data.user_id)
+            res.cookie('UserInfo', { "uid": data.user_id })
             res.send(data)
         })
         .catch(error => console.log("error : ", error))
-
 })
+
 app.get('*', (req, res) => {
+
+    const store = createStore(allReducers);
+
     console.log("req url in server side:", req.url)
     var api_url = ""
     for (let i = 0; i < apiRoutes.length; i++) {
@@ -66,15 +71,31 @@ app.get('*', (req, res) => {
                 pagedata: data,
                 pageType: req.url.slice(1).toLowerCase()
             }
+            console.log("---Before PREFETCH :", store.getState())
             store.dispatch({ type: "PREFETCH", payload: resp_obj })
             //console.log("data :", data)
             console.log("req.url :", req.url, "->", store.getState())
-
-            const html = renderToString(
-                <Provider store={store} >
-                    <Html url={req.url} initial_state={store.getState()} />
-                </Provider>)
-            res.send(`${html}`);
+            if (req.cookies["UserInfo"] !== undefined) {
+                console.log("---- cookies --- ", req.cookies["UserInfo"]);
+                fetch("http://localhost:3014/userinfo?_id=" + req.cookies["UserInfo"].uid)
+                    .then(response => response.json())
+                    .then((userdata) => {
+                        console.log("server side inside login data fetch", userdata)
+                        store.dispatch({ type: "LOGIN", payload: userdata })
+                        const html = renderToString(
+                            <Provider store={store} >
+                                <Html url={req.url} initial_state={store.getState()} />
+                            </Provider>)
+                        res.send(`${html}`);
+                    })
+            }
+            else {
+                const html = renderToString(
+                    <Provider store={store} >
+                        <Html url={req.url} initial_state={store.getState()} />
+                    </Provider>)
+                res.send(`${html}`);
+            }
         })
         .catch((error) => {
             console.log("error : ", error)
