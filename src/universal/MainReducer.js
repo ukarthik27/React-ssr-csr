@@ -16,6 +16,11 @@ export default function (state = initial_state, action) {
             newObj.isLoggedIn = true
             newObj.userData = action.payload
             return newObj
+        case "LOGOUT":
+            var newObj = {...state};
+            newObj.isLoggedIn = false
+            newObj.userData = {}
+            return newObj
     }
 
     console.log("Initial State : ", initial_state)

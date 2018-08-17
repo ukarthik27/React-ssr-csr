@@ -10,8 +10,7 @@ class LoginComp extends React.Component {
 
     logoutHandler = () => {
         if(this.props.items.isLoggedIn){
-            this.props.items.isLoggedIn = false
-            this.props.items.userData = {}
+            this.props.logout();
             fetch("http://localhost:3015/Logout", {
                 method: "POST",
                 mode: "cors",
@@ -25,6 +24,7 @@ class LoginComp extends React.Component {
             .then(res => res.json())
             .then((data)=>{
                 console.log("--- CliEnt side resp for LoGoUt :", data)
+                console.log("---- login comp (this.props.items) after logout ->" ,this.props)
             })
         }
     }
@@ -87,7 +87,8 @@ class LoginComp extends React.Component {
 
 function matchDispatchToProps(dispatch) {
     return {
-        loginUpdate: (data) => dispatch({ type: "LOGIN", payload: data })
+        loginUpdate: (data) => dispatch({ type: "LOGIN", payload: data }),
+        logout : () => dispatch( { type : "LOGOUT" })
     }
 }
 
