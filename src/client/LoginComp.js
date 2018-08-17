@@ -8,6 +8,26 @@ class LoginComp extends React.Component {
         this.submitHandler = this.submitHandler.bind(this)
     }
 
+    logoutHandler = () => {
+        if(this.props.items.isLoggedIn){
+            this.props.items.isLoggedIn = false
+            this.props.items.userData = {}
+            fetch("http://localhost:3015/Logout", {
+                method: "POST",
+                mode: "cors",
+                cache: "no-cache",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: {}
+            })
+            .then(res => res.json())
+            .then((data)=>{
+                console.log("--- CliEnt side resp for LoGoUt :", data)
+            })
+        }
+    }
     submitHandler = () => {
         var user_obj = {}
         user_obj.email = document.getElementById("login-comp-uname").value;
@@ -43,6 +63,7 @@ class LoginComp extends React.Component {
         }
         return (
             <div>
+                <div id="alternate-login" onClick={this.logoutHandler}>logout</div>
                 {
                     this.props.items.isLoggedIn ?
                         <div id="userinfo">

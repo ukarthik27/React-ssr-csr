@@ -51,7 +51,10 @@ app.use("/LoginValidate", (req, res) => {
         })
         .catch(error => console.log("error : ", error))
 })
-
+app.post("/Logout", (req,res)=>{
+    res.clearCookie("UserInfo")
+    res.send(true)
+})
 app.get('*', (req, res) => {
 
     const store = createStore(allReducers);
