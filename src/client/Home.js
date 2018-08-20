@@ -16,7 +16,7 @@ class Home extends React.Component {
             document.getElementsByTagName("head")[0].appendChild(linkTag)
             history.add("/Home");
         }
-        fetch("http://localhost:1337/homepagedata")
+        fetch("http://localhost:3015/homepagedata")
             .then(res => res.json())
             .then((data) => {
                 var state_obj = {

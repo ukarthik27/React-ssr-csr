@@ -16,11 +16,10 @@ class About extends React.Component {
             document.getElementsByTagName("head")[0].appendChild(linkTag)
             history.add("/About")
         }
-        fetch("http://localhost:1337/aboutpagedata")
+        fetch("http://localhost:3015/aboutpagedata")
             .then(res => res.json())
             .then((data) => {
                 var state_obj = {
-                    username: "set this right",
                     pagedata: data,
                     pageType: "about"
                 }

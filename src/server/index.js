@@ -31,6 +31,20 @@ app.use("/build", express.static('build'));
 
 //app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
 app.get('/favicon.ico', (req, res) => res.send(""))
+app.get("/homepagedata", (req, res) => {
+    fetch("http://localhost:1337/homepagedata")
+        .then(res => res.json())
+        .then((data) => {
+            res.send(data)
+        })
+})
+app.get("/aboutpagedata", (req, res) => {
+    fetch("http://localhost:1337/aboutpagedata")
+        .then(res => res.json())
+        .then((data) => {
+            res.send(data)
+        })
+})
 app.use("/LoginValidate", (req, res) => {
     console.log("------- server side user obj:", req.body)
     fetch("http://localhost:3014/Validate", {
