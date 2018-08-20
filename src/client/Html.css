@@ -114,3 +114,9 @@ body {
   font-size: 1.25em;
   padding : 0.3em;
 }
+
+#alternate-login {
+    position: absolute;
+    right: 0.7em;
+    cursor: pointer;
+}
