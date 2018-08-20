@@ -24,7 +24,7 @@ class App extends Component {
 
         const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(state)}`
         
-        const styleFile = "/build/"+state.items.pageType + ".css"
+        const styleFile = state.items.pageType !== undefined ?  "/build/"+state.items.pageType + ".css" : ""
         console.log("Server - pageType",styleFile)
         //console.log("props in server side :", this.props)
         //console.log("username in server side :", this.props.initital_state.username)
@@ -35,7 +35,9 @@ class App extends Component {
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <style type="text/css" dangerouslySetInnerHTML={{ __html: styleApp }} />
                     <script src="/build/index.js" defer></script>
-                    <link rel = "stylesheet" type = "text/css"  href = {styleFile} />
+                    {
+                        styleFile !== "" ? <link rel = "stylesheet" type = "text/css"  href = {styleFile} /> : null
+                    }
                     <script dangerouslySetInnerHTML={{ __html: initialState }} />
                 </head>
                 <body id="container">

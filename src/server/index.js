@@ -51,9 +51,34 @@ app.use("/LoginValidate", (req, res) => {
         })
         .catch(error => console.log("error : ", error))
 })
-app.post("/Logout", (req,res)=>{
+app.post("/Logout", (req, res) => {
     res.clearCookie("UserInfo")
     res.send(true)
+})
+app.get("/Login", (req, res) => {
+    const store = createStore(allReducers);
+    if (req.cookies["UserInfo"] !== undefined) {
+        console.log("---- cookies --- ", req.cookies["UserInfo"]);
+        fetch("http://localhost:3014/userinfo?_id=" + req.cookies["UserInfo"].uid)
+            .then(response => response.json())
+            .then((userdata) => {
+                console.log("server side inside login data fetch", userdata)
+                store.dispatch({ type: "LOGIN", payload: userdata })
+                const html = renderToString(
+                    <Provider store={store} >
+                        <Html url={req.url} initial_state={store.getState()} />
+                    </Provider>)
+                res.send(`${html}`);
+            })
+    }
+    else {
+        const html = renderToString(
+            <Provider store={store} >
+                <Html url={req.url} initial_state={store.getState()} />
+            </Provider>)
+        res.send(`${html}`);
+    }
+
 })
 app.get('*', (req, res) => {
 
@@ -70,7 +95,6 @@ app.get('*', (req, res) => {
         .then(response => response.json())
         .then((data) => {
             var resp_obj = {
-                username: os.userInfo().username,
                 pagedata: data,
                 pageType: req.url.slice(1).toLowerCase()
             }
