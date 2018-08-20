@@ -20,7 +20,6 @@ class Home extends React.Component {
             .then(res => res.json())
             .then((data) => {
                 var state_obj = {
-                    username: "set this right",
                     pagedata: data,
                     pageType: "home"
                 }

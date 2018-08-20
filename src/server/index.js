@@ -57,6 +57,11 @@ app.post("/Logout", (req, res) => {
 })
 app.get("/Login", (req, res) => {
     const store = createStore(allReducers);
+    var state_obj = {
+        pagedata: [],
+        pageType: req.url.slice(1).toLowerCase()
+    }
+    store.dispatch({ type: "PREFETCH", payload: state_obj })
     if (req.cookies["UserInfo"] !== undefined) {
         console.log("---- cookies --- ", req.cookies["UserInfo"]);
         fetch("http://localhost:3014/userinfo?_id=" + req.cookies["UserInfo"].uid)
